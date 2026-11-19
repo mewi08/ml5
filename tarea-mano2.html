@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/estilos.css" />
+    <title>ML5</title>
+
+    <!-- CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/p5@2.3.2/lib/p5.js"></script>
+    <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
+  </head>
+  <body>
+    <div class="contenedor">
+      <h2>ML5 - Modelo HandPose</h2>
+
+      <p>Coloca tus manos frente a la cámara y muestra tus dedos índices.</p>
+
+      <div class="result" id="ml5-result"><!-- Result --></div>
+
+      <p>
+        Esta aplicación utiliza la cámara y el modelo HandPose de ML5 para
+        detectar las manos y dibujar una línea entre los dedos índices.
+      </p>
+    </div>
+    <script>
+      const resultados = document.querySelector("resultados");
+
+      let handPose;
+      let video;
+      let hands = [];
+      let distancia;
+
+      async function setup() {
+        handPose = await ml5.handPose();
+
+        let lienzo = createCanvas(640, 480);
+        lienzo.parent("ml5-result");
+
+        video = createCapture(VIDEO);
+        video.size(640, 480);
+        video.hide();
+        handPose.detectStart(video, gotHands);
+      }
+
+      async function draw() {
+        image(video, 0, 0, width, height);
+
+        if (hands.length == 2) {
+          let fingerLeft = hands[0].index_finger_tip;
+          let fingerRight = hands[1].index_finger_tip;
+
+          fill(0, 255, 0, 200);
+          stroke(0);
+          strokeWeight(4);
+          line(fingerLeft.x, fingerLeft.y, fingerRight.x, fingerRight.y);
+        }
+      }
+
+      async function gotHands(results) {
+        hands = results;
+      }
+    </script>
+  </body>
+</html>
