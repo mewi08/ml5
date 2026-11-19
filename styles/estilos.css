@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+.contenedor {
+  width: 90%;
+  max-width: 850px;
+  margin: 40px auto;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+h2 {
+  color: #2563eb;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+canvas {
+  border-radius: 12px;
+}
+
+p {
+  color: #64748b;
+  font-size: 16px;
+}
+
+.result {
+  justify-content: center;
+  width: 100%;
+  margin: 20px 0;
+}
