@@ -34,3 +34,35 @@ p {
   width: 100%;
   margin: 20px 0;
 }
+
+.chart {
+  width: 100%;
+  max-width: 320px;
+  margin: 15px auto;
+}
+
+.prediction {
+  margin-bottom: 15px;
+}
+
+.label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #334155;
+}
+
+.bar-container {
+  width: 100%;
+  height: 20px;
+  background-color: #e2e8f0;
+  border-radius: 4px;
+}
+
+.bar {
+  height: 100%;
+  background-color: #2196f3;
+  border-radius: 4px;
+  transition: width 0.2s ease;
+}
