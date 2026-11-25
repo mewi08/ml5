@@ -18,6 +18,10 @@
       <p>Coloca un objeto frente a la cámara.</p>
 
       <div class="result" id="tm-video"></div>
+      
+      <button class="speechSynthesis" id="tm-audio">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-volume-2 preview-icon"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.364 18.364a9 9 0 0 0 0-12.728"/></svg>
+      </button>
 
       <div class="chart" id="tm-result"></div>
       <p>
@@ -47,6 +51,14 @@
         video.hide();
 
         classifyVideo();
+
+        const button = document.getElementById("tm-audio");
+
+        button.addEventListener("click", () => {
+          if (predictions.length > 0) {
+            textToSpeech(predictions[0].label);
+          }
+        });
       }
 
       function draw() {
@@ -100,6 +112,12 @@
           document.getElementById(`percentage-${label}`).textContent =
             `${confidence.toFixed(1)}%`;
         });
+      }
+
+      function textToSpeech(label) {
+        speechSynthesis.cancel();
+        const message = new SpeechSynthesisUtterance(label);
+        speechSynthesis.speak(message);
       }
     </script>
   </body>
